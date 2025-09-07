@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookstore</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<style>
+  html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+}
+.navbar {
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.navbar .nav-link {
+  font-weight: 800;
+  margin: 0 10px;
+}
+.navbar .nav-link:hover {
+  color: #0d6efd; 
+}
+
+</style>
+
+
+</head>
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold " href="#">
+        CodeBooks
+      </a>
+
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'hero' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AllBooks' %}">Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Blog' %}">Blog</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+        </ul>
+
+
+       <!-- show wish button and out when we authenticate the user / or just button -->
+       <!-- Right side CTA + Favorites -->
+<div class="d-flex align-items-center">
+  {% if user.is_authenticated %}
+     <a href="{% url 'favorites' %}" class="me-3 text-dark position-relative">
+        <i class="bi bi-heart-fill p-2 py-2"></i>
+        <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ user.wishlist_set.count }}
+        </span>
+     </a>
+     <a href="{% url 'logout' %}" class="btn btn-outline-danger ">
+       <i class="bi bi-box-arrow-right"></i>
+     </a>
+
+
+
+  {% else %}
+    <a href="{% url 'auth_login' %}" class="btn btn-primary rounded-pill px-4">
+      Login
+    </a>
+  {% endif %}
+</div>
+
+
+</header>
+
+
+<main class="mt-5" >
+    {% block content %}
+
+    {% endblock %}
+</main>
+
+
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted mt-5">
+  <!-- Social media section -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Connect with us on social networks:</span>
+    </div>
+    <!-- Right -->
+    <div>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="#" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Links section -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <!-- About -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-book me-3"></i>BookStore
+          </h6>
+          <p>
+            Explore a wide collection of programming books. Keep track of your favorites and discover new knowledge every day.
+          </p>
+        </div>
+
+        <!-- Products -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">Categories</h6>
+          <p><a href="#!" class="text-reset">Web Development</a></p>
+          <p><a href="#!" class="text-reset">Data Science</a></p>
+          <p><a href="#!" class="text-reset">Machine Learning</a></p>
+          <p><a href="#!" class="text-reset">AI</a></p>
+        </div>
+
+        <!-- Useful links -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">Useful Links</h6>
+          <p><a href="#!" class="text-reset">Pricing</a></p>
+          <p><a href="#!" class="text-reset">Settings</a></p>
+          <p><a href="#!" class="text-reset">Orders</a></p>
+          <p><a href="#!" class="text-reset">Help</a></p>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> New York, NY 10012, USA</p>
+          <p><i class="fas fa-envelope me-3"></i> info@bookstore.com</p>
+          <p><i class="fas fa-phone me-3"></i> +1 234 567 890</p>
+          <p><i class="fas fa-print me-3"></i> +1 234 567 891</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Copyright -->
+  <div class="text-center p-4 bg-light" style="border-top: 1px solid rgba(0,0,0,0.1);">
+    © 2025 BookStore. All rights reserved.
+  </div>
+</footer>
+
+<!-- Footer -->
+</body>
+</html>

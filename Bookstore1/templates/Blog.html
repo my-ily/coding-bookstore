@@ -1,0 +1,70 @@
+{% extends 'base1.html' %}
+{% block content %}
+
+
+<section style="margin-top: 80px;">
+<div class="container my-5" >
+  <h1 class="fw-bold text-center mb-4 text-primary">📖 Our Blog</h1>
+  <p class="text-center text-muted mb-5">
+    Stay updated with the latest in programming, technology, and our curated book collections.
+  </p>
+
+  <div class="row g-4">
+    <!-- Blog Post 1 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
+             class="card-img-top" alt="Why Coding Books Still Matter">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Why Coding Books Still Matter in 2025</h5>
+          <p class="card-text text-muted">
+            Despite AI tools and online tutorials, books remain one of the best resources to gain deep, structured programming knowledge.
+          </p>
+          <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Post 2 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80" 
+             class="card-img-top" alt="Learning Python">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Top 5 Python Books for Beginners</h5>
+          <p class="card-text text-muted">
+            A handpicked list of beginner-friendly Python books to start your programming journey with confidence.
+          </p>
+          <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Post 3 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <img src="https://images.unsplash.com/photo-1593642634443-44adaa06623a?auto=format&fit=crop&w=800&q=80" 
+             class="card-img-top" alt="AI & Coding">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">AI & Programming: What's Next?</h5>
+          <p class="card-text text-muted">
+            How artificial intelligence is shaping the way we learn coding and what role books still play in this new era.
+          </p>
+          <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+     <div class="text-center mt-5">
+    <a href="{% url 'hero' %}" class="btn btn-gradient btn-lg px-4">
+      <i class="bi bi-arrow-left-circle"></i> Back to Home
+    </a>
+  </div>
+</div>
+</section>
+{% endblock %}
+
+
