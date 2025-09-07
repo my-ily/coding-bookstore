@@ -70,7 +70,7 @@ def add_to_wishlist(request, book_id):
         info_link = request.POST.get("infoLink", "")[:500]
 
 
-        # تأكد أن البيانات موجودة
+     
         if not title:
             return JsonResponse({"status": "error", "message": "Missing title"}, status=400)
 
@@ -146,11 +146,11 @@ def fetch_books(query, max_results=40, start_index=0):
     }
     try:
         response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()  # رفع استثناء عند خطأ HTTP
+        response.raise_for_status() 
         data = response.json()
     except Exception as e:
         print("Error fetching books:", e)
-        data = {"items": []}  # نعيد قائمة فارغة عند الخطأ
+        data = {"items": []} 
 
     books = []
     for item in data.get("items", []):
