@@ -1,1 +1,1 @@
-web: gunicorn Bookstore1.wsgi
+web: gunicorn config.wsgi
