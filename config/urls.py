@@ -16,19 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from books import views 
+
 from Bookstore1 import views as v2
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('base/', views.basepage, name='basepage'), 
-path('',views.landpage,name='landpage'),
- path('book', views.programming_books_view, name='programming_books'),
-path('booklist/', views.booklist, name='booklist'), 
-path('categorybook/', views.categorybook, name='categorybook'), 
-path('details/', views.details, name='details'),
- path('cart/', views.cart, name='cart'),
- path('proBook/', views.cart, name='cart'),
+
+path('',v2.hero,name='hero'),
+
  path('hero/', v2.hero, name='hero'),
 path('AllBooks/',v2.programming_books_view , name='AllBooks'),
 path('Blog/',v2.Blog , name='Blog'),
