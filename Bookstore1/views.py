@@ -144,11 +144,17 @@ def fetch_books(query, max_results=40, start_index=0):
         "maxResults": max_results,
         "startIndex": start_index
     }
-    response = requests.get(url, params=params)
-    data = response.json()
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()  # رفع استثناء عند خطأ HTTP
+        data = response.json()
+    except Exception as e:
+        print("Error fetching books:", e)
+        data = {"items": []}  # نعيد قائمة فارغة عند الخطأ
+
     books = []
     for item in data.get("items", []):
-        volume = item["volumeInfo"]
+        volume = item.get("volumeInfo", {})
         books.append({
             "id": item.get("id"),
             "title": volume.get("title"),
@@ -156,6 +162,7 @@ def fetch_books(query, max_results=40, start_index=0):
             "thumbnail": volume.get("imageLinks", {}).get("thumbnail", "https://via.placeholder.com/150")
         })
     return books
+
 def programming_books_view(request):
     books_page1 = fetch_books("programming", max_results=40, start_index=0)
     books_page2 = fetch_books("programming", max_results=40, start_index=40)
