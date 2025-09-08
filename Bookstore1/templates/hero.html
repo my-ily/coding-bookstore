@@ -10,8 +10,10 @@
         <p class="lead mb-4 fs-5">
           Discover the perfect programming books tailored for you! Get instant book suggestions, read concise summaries, and find exactly what you need to boost your coding journey—whether you're a beginner or aiming for mastery.
         </p>
-        <a href="{% url 'Allbooks' %}" class="btn btn-primary btn-lg me-3">Explore Your Books</a>
-        <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-lg">How It Works</a>
+<div class="d-flex flex-column flex-sm-row gap-2">
+  <a href="{% url 'Allbooks' %}" class="btn btn-primary btn-lg">Explore Your Books</a>
+  <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-lg">How It Works</a>
+</div>
       </div>
   
 
