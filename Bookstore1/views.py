@@ -167,7 +167,7 @@ def programming_books_view(request):
     books_page1 = fetch_books("programming", max_results=40, start_index=0)
     books_page2 = fetch_books("programming", max_results=40, start_index=40)
     all_books = books_page1 + books_page2
-    return render(request, "Bookstore1/AllBooks.html", {"all_books": all_books})
+    return render(request, "AllBooks.html", {"all_books": all_books})
 
 
 
