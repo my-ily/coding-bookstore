@@ -1,17 +1,19 @@
 {% extends 'base1.html' %}
 {% block content %}
+<!-- Hero Section -->
 <section class="hero vh-90 d-flex align-items-center">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row align-items-center pt-3">
       <!-- Text -->
-   <div class="col-md-6">
-    <h1 class="display-3 fw-bold mb-4"> Unlock Your Coding Potential!</h1>
-    <p class="lead mb-4 fs-4">
-        Discover the perfect programming books tailored for you! Get instant book suggestions, read concise summaries, and find exactly what you need to boost your coding journey—whether you're a beginner or aiming for mastery.
-    </p>
-    <a href="{% url 'Allbooks' %}" class="btn btn-primary btn-lg me-3">Explore Your Books</a>
-    <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-lg">How It Works</a>
-</div>
+      <div class="col-md-6">
+        <h1 class="display-5 fw-bold mb-3">Unlock Your Coding Potential!</h1>
+        <p class="lead mb-4 fs-5">
+          Discover the perfect programming books tailored for you! Get instant book suggestions, read concise summaries, and find exactly what you need to boost your coding journey—whether you're a beginner or aiming for mastery.
+        </p>
+        <a href="{% url 'Allbooks' %}" class="btn btn-primary btn-lg me-3">Explore Your Books</a>
+        <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-lg">How It Works</a>
+      </div>
+  
 
       <!-- Image -->
       <div class="col-md-6 text-center">
@@ -199,10 +201,20 @@
       right: -30px;
     }
   }
-  .hero {
+.hero {
   background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
   color: white;
-  min-height: 80vh;
+  min-height: 70vh; /* أقل ارتفاع */
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    align-items: flex-start; /* خليه من فوق */
+  }
 }
 
 .hero h1, .hero p {
