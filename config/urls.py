@@ -25,7 +25,7 @@ urlpatterns = [
 path('',v2.hero,name='hero'),
 
  path('hero/', v2.hero, name='hero'),
-path('AllBooks/',v2.programming_books_view , name='AllBooks'),
+path('Allbooks/',v2.programming_books_view , name='Allbooks'),
 path('Blog/',v2.Blog , name='Blog'),
 path('about/',v2.about , name='about'),
 path('favorites/',v2.favorites,name ='favorites'),
