@@ -25,7 +25,7 @@ urlpatterns = [
 path('', v2.hero, name='hero'),
 path('hero/', v2.hero, name='hero'),
 
-
+# file for 
 #  path('hero/', v2.hero, name='hero'),
 path('Allbooks/',v2.programming_books_view , name='Allbooks'),
 path('Blog/',v2.Blog , name='Blog'),

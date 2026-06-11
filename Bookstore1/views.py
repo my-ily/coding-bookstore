@@ -42,11 +42,9 @@ def auth_reg(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()  # نحفظ المستخدم
-            print("✅ النموذج صالح، جاري إنشاء المستخدم")
             login(request, user)  # نسجل دخوله مباشرة
             return redirect('hero')  # نوديه على صفحة الدفع مباشرة مثلاً
         else:
-            print("❌ النموذج غير صالح")
             print(form.errors)
     else:
         form = UserCreationForm()
@@ -60,6 +58,7 @@ def auth_reg(request):
 def wishlist_view(request):
     items = Wishlist.objects.filter(user=request.user)
     return render(request, "favorites.html", {"books": items})
+
 
 @login_required
 def add_to_wishlist(request, book_id):
@@ -135,15 +134,17 @@ def about(request):
 def favorites(request):
     return render(request ,'favorites.html')
 
+# function to feach the google book api 
 
 def fetch_books(query, max_results=40, start_index=0):
-    import requests
+   
     url = "https://www.googleapis.com/books/v1/volumes"
     params = {
         "q": query,
         "maxResults": max_results,
         "startIndex": start_index
     }
+    
     try:
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status() 
@@ -162,6 +163,9 @@ def fetch_books(query, max_results=40, start_index=0):
             "thumbnail": volume.get("imageLinks", {}).get("thumbnail", "https://via.placeholder.com/150")
         })
     return books
+
+
+
 
 def programming_books_view(request):
     books_page1 = fetch_books("programming", max_results=40, start_index=0)
