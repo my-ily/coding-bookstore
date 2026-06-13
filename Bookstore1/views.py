@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse ,JsonResponse
 from django.template import loader
+from django.conf import settings
 import requests
 # Create your views here.
 from django.shortcuts import get_object_or_404
@@ -20,22 +21,19 @@ def custom_logout(request):
     logout(request)
     return redirect('hero') 
 
-
 def auth_login(request):
    if request.method == "POST":
     username = request.POST.get("username")
     password = request.POST.get("password")
     user=authenticate(request,username=username ,password=password )
 
-
     if user is not None:
        login(request,user)
-#نقل المستخدم إلى صفحة ثانية (بعد تنفيذ حدث مثل تسجيل دخول
        return redirect("hero")
     
    return render(request,'auth_login.html')  
    
-
+# maybe we should put error message and return nothing when pass/email is trable 
 @csrf_exempt
 def auth_reg(request):
     if request.method == "POST":
@@ -49,8 +47,6 @@ def auth_reg(request):
     else:
         form = UserCreationForm()
     return render(request, 'auth_reg.html', {'form': form})
-   #  return HttpResponse(template.render())
-
 
 
 
@@ -83,11 +79,6 @@ def add_to_wishlist(request, book_id):
                 "info_link": info_link
             }
         )
-
-        # if created:
-        #     print("✅ Book added to wishlist")
-        # else:
-        #     print("⚠ Book already in wishlist")
         return redirect("favorites")
     return JsonResponse({"status": "error"}, status=400)
 
@@ -100,10 +91,18 @@ def remove_from_wishlist(request, book_id):
     # return JsonResponse({"status": "error"}, status=400)
     return redirect("favorites")
 
+# function to feach the google book api 
+
+def _google_books_params(**extra):
+    params = dict(extra)
+    if settings.GOOGLE_BOOKS_API_KEY:
+        params['key'] = settings.GOOGLE_BOOKS_API_KEY
+    return params
+
 
 def book_detail(request, book_id):
     url = f"https://www.googleapis.com/books/v1/volumes/{book_id}"
-    response = requests.get(url)
+    response = requests.get(url, params=_google_books_params(), timeout=10)
     data = response.json()
 
     volume = data.get("volumeInfo", {})
@@ -118,32 +117,13 @@ def book_detail(request, book_id):
     return render(request, "detail.html", {"book": book, "book_id": book_id})
 
 
-
-
-def hero(request):
-    return render(request, 'hero.html')
-
-
-def Blog(request):
-    return render(request ,'Blog.html')
-
-
-def about(request):
-    return render(request ,'about.html')
-
-def favorites(request):
-    return render(request ,'favorites.html')
-
-# function to feach the google book api 
-
 def fetch_books(query, max_results=40, start_index=0):
-   
     url = "https://www.googleapis.com/books/v1/volumes"
-    params = {
-        "q": query,
-        "maxResults": max_results,
-        "startIndex": start_index
-    }
+    params = _google_books_params(
+        q=query,
+        maxResults=max_results,
+        startIndex=start_index,
+    )
     
     try:
         response = requests.get(url, params=params, timeout=10)
@@ -168,11 +148,22 @@ def fetch_books(query, max_results=40, start_index=0):
 
 
 def programming_books_view(request):
-    books_page1 = fetch_books("programming", max_results=40, start_index=0)
-    books_page2 = fetch_books("programming", max_results=40, start_index=40)
-    all_books = books_page1 + books_page2
+    all_books = fetch_books("programming", max_results=40, start_index=0)
     return render(request, "Allbooks.html", {"all_books": all_books})
 
 
+def hero(request):
+    return render(request, 'hero.html')
+
+
+def Blog(request):
+    return render(request ,'Blog.html')
+
+
+def about(request):
+    return render(request ,'about.html')
+
+def favorites(request):
+    return render(request ,'favorites.html')
 
 

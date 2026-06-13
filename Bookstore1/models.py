@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book_id = models.CharField(max_length=100)
-    title = models.CharField(max_length=500)  # بدل 255
+    title = models.CharField(max_length=500) 
     authors = models.CharField(max_length=500, blank=True)
     thumbnail = models.URLField(max_length=500, blank=True) #image
     info_link = models.URLField(max_length=500, blank=True)

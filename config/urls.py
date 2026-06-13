@@ -20,26 +20,23 @@ from django.urls import path
 from Bookstore1 import views as v2
 from django.contrib.auth import views as auth_views
 urlpatterns = [
-    path('admin/', admin.site.urls),
+path('admin/', admin.site.urls),
 
 path('', v2.hero, name='hero'),
 path('hero/', v2.hero, name='hero'),
 
-# file for 
-#  path('hero/', v2.hero, name='hero'),
 path('Allbooks/',v2.programming_books_view , name='Allbooks'),
 path('Blog/',v2.Blog , name='Blog'),
 path('about/',v2.about , name='about'),
 path('favorites/',v2.favorites,name ='favorites'),
 path("detail/<str:book_id>/", v2.book_detail, name="detail"),
 
- path("wishlist/add/<str:book_id>/", v2.add_to_wishlist, name="add_to_wishlist"),
-    path("wishlist/", v2.wishlist_view, name="favorites"),
-    path("wishlist/remove/<str:book_id>/", v2.remove_from_wishlist, name="remove_from_wishlist"),
+path("wishlist/add/<str:book_id>/", v2.add_to_wishlist, name="add_to_wishlist"),
+path("wishlist/", v2.wishlist_view, name="favorites"),
+path("wishlist/remove/<str:book_id>/", v2.remove_from_wishlist, name="remove_from_wishlist"),
 
-
-     path('auth_login/', v2.auth_login, name='auth_login'),
-       path('auth_reg/',v2.auth_reg,name='auth_reg'),
-      path('logout/', v2.custom_logout, name='logout'),
+path('auth_login/', v2.auth_login, name='auth_login'),
+path('auth_reg/',v2.auth_reg,name='auth_reg'),
+path('logout/', v2.custom_logout, name='logout'),
    
 ]
