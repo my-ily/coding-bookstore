@@ -10,7 +10,7 @@
       <div class="col">
         <div class="card book-card h-100 shadow-sm border-0">
    
-          <a href="{% url 'detail' book.id %}" class="text-decoration-none text-dark">
+          <a href="{% url 'detail' book.id %}" class="text-decoration-none text-white">
             <img src="{{ book.thumbnail }}" class="card-img-top" alt="{{ book.title }}">
         
 
@@ -52,7 +52,7 @@
 }
 .book-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.35);
 }
 .book-card img {
   height: 220px;
