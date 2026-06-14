@@ -28,7 +28,6 @@ path('hero/', v2.hero, name='hero'),
 path('Allbooks/',v2.programming_books_view , name='Allbooks'),
 path('Blog/',v2.Blog , name='Blog'),
 path('about/',v2.about , name='about'),
-path('favorites/',v2.favorites,name ='favorites'),
 path("detail/<str:book_id>/", v2.book_detail, name="detail"),
 
 path("wishlist/add/<str:book_id>/", v2.add_to_wishlist, name="add_to_wishlist"),

@@ -87,9 +87,8 @@ def add_to_wishlist(request, book_id):
 def remove_from_wishlist(request, book_id):
     if request.method == "POST":
         Wishlist.objects.filter(user=request.user, book_id=book_id).delete()
-    #     return JsonResponse({"status": "ok"})
-    # return JsonResponse({"status": "error"}, status=400)
-    return redirect("favorites")
+        return JsonResponse({"status": "ok"})
+    return JsonResponse({"status": "error"}, status=400)
 
 # function to feach the google book api 
 
@@ -162,8 +161,5 @@ def Blog(request):
 
 def about(request):
     return render(request ,'about.html')
-
-def favorites(request):
-    return render(request ,'favorites.html')
 
 
